@@ -1,0 +1,42 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  background-color: #1a1a1a;
+  border-radius: 5px;
+}
+
+.board-row {
+  display: flex;
+  gap: 2px;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background-color: #2a2a2a;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cell:hover {
+  background-color: #3a3a3a;
+}
+
+.cell.empty {
+  background-color: #2a2a2a;
+}
+
+.cell.ship {
+  background-color: #4a4a4a;
+}
+
+.cell.hit {
+  background-color: #ff4444;
+}
+
+.cell.miss {
+  background-color: #4444ff;
+} 

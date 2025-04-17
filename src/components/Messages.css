@@ -1,0 +1,26 @@
+.messages-container {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.messages-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.message {
+  padding: 8px;
+  margin: 5px 0;
+  background-color: #3a3a3a;
+  border-radius: 5px;
+  color: white;
+}
+
+.message:last-child {
+  background-color: #4444ff;
+} 
