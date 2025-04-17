@@ -12,10 +12,14 @@ const ShipPlacement = () => {
   const handleShipSelect = (ship) => {
     if (ship.placed) return;
     setSelectedShip(ship);
+    dispatch(placeShip({ ship: ship.name, orientation: isVertical ? 'vertical' : 'horizontal' }));
   };
 
   const handleOrientationToggle = () => {
     setIsVertical(!isVertical);
+    if (selectedShip) {
+      dispatch(placeShip({ ship: selectedShip.name, orientation: !isVertical ? 'vertical' : 'horizontal' }));
+    }
   };
 
   return (

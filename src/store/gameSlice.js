@@ -173,6 +173,11 @@ const gameSlice = createSlice({
         // Check if ship is sunk
         if (checkShipSunk(board, shipName)) {
           state.messages.push(`${state.currentPlayer === 'player' ? 'You' : 'Computer'} sunk the ${shipName}!`);
+          // Update ship status
+          const hitShip = ships.find(ship => ship.name === shipName);
+          if (hitShip) {
+            hitShip.placed = false;
+          }
         }
       }
 
