@@ -1,5 +1,5 @@
 
-React Battleship 
+# React Battleship 
 
 This is just an example iteration of the classic boardgame "Battleship" done in React.  
 
