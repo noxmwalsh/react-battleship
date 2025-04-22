@@ -6,17 +6,6 @@ import ShipPlacement from './ShipPlacement';
 import gameReducer from '../store/gameSlice';
 
 const createMockStore = (initialState) => {
-  return configureStore({
-    reducer: {
-      game: gameReducer
-    },
-    preloadedState: {
-      game: initialState
-    }
-  });
-};
-
-describe('ShipPlacement Component', () => {
   const SHIPS = [
     { name: 'carrier', size: 5, placed: false },
     { name: 'battleship', size: 4, placed: false },
@@ -25,9 +14,37 @@ describe('ShipPlacement Component', () => {
     { name: 'destroyer', size: 2, placed: false },
   ];
 
+  return configureStore({
+    reducer: {
+      game: gameReducer
+    },
+    preloadedState: {
+      game: {
+        playerBoard: Array(10).fill().map(() => Array(10).fill(null)),
+        computerBoard: Array(10).fill().map(() => Array(10).fill(null)),
+        playerShips: SHIPS,
+        computerShips: SHIPS,
+        gameStatus: 'setup',
+        currentPlayer: 'player',
+        winner: null,
+        messages: [],
+        selectedShip: null,
+        ...initialState
+      }
+    }
+  });
+};
+
+describe('ShipPlacement Component', () => {
   it('renders ship options', () => {
     const store = createMockStore({
-      playerShips: SHIPS,
+      playerShips: [
+        { name: 'carrier', size: 5, placed: false },
+        { name: 'battleship', size: 4, placed: false },
+        { name: 'cruiser', size: 3, placed: false },
+        { name: 'submarine', size: 3, placed: false },
+        { name: 'destroyer', size: 2, placed: false },
+      ],
       gameStatus: 'setup'
     });
     const { getByText } = render(
@@ -36,14 +53,26 @@ describe('ShipPlacement Component', () => {
       </Provider>
     );
 
-    SHIPS.forEach(ship => {
+    [
+      { name: 'carrier', size: 5 },
+      { name: 'battleship', size: 4 },
+      { name: 'cruiser', size: 3 },
+      { name: 'submarine', size: 3 },
+      { name: 'destroyer', size: 2 },
+    ].forEach(ship => {
       expect(getByText(`${ship.name} (${ship.size})`)).toBeInTheDocument();
     });
   });
 
   it('handles ship selection', () => {
     const store = createMockStore({
-      playerShips: SHIPS,
+      playerShips: [
+        { name: 'carrier', size: 5, placed: false },
+        { name: 'battleship', size: 4, placed: false },
+        { name: 'cruiser', size: 3, placed: false },
+        { name: 'submarine', size: 3, placed: false },
+        { name: 'destroyer', size: 2, placed: false },
+      ],
       gameStatus: 'setup'
     });
     const { getByText } = render(
@@ -59,7 +88,13 @@ describe('ShipPlacement Component', () => {
 
   it('handles orientation toggle', () => {
     const store = createMockStore({
-      playerShips: SHIPS,
+      playerShips: [
+        { name: 'carrier', size: 5, placed: false },
+        { name: 'battleship', size: 4, placed: false },
+        { name: 'cruiser', size: 3, placed: false },
+        { name: 'submarine', size: 3, placed: false },
+        { name: 'destroyer', size: 2, placed: false },
+      ],
       gameStatus: 'setup'
     });
     const { getByText } = render(
@@ -74,7 +109,13 @@ describe('ShipPlacement Component', () => {
   });
 
   it('disables placed ships', () => {
-    const placedShips = SHIPS.map(ship => ({ ...ship, placed: true }));
+    const placedShips = [
+      { name: 'carrier', size: 5, placed: true },
+      { name: 'battleship', size: 4, placed: true },
+      { name: 'cruiser', size: 3, placed: true },
+      { name: 'submarine', size: 3, placed: true },
+      { name: 'destroyer', size: 2, placed: true },
+    ];
     const store = createMockStore({
       playerShips: placedShips,
       gameStatus: 'setup'
@@ -91,7 +132,13 @@ describe('ShipPlacement Component', () => {
 
   it('shows placement instructions when ship is selected', () => {
     const store = createMockStore({
-      playerShips: SHIPS,
+      playerShips: [
+        { name: 'carrier', size: 5, placed: false },
+        { name: 'battleship', size: 4, placed: false },
+        { name: 'cruiser', size: 3, placed: false },
+        { name: 'submarine', size: 3, placed: false },
+        { name: 'destroyer', size: 2, placed: false },
+      ],
       gameStatus: 'setup'
     });
     const { getByText } = render(
