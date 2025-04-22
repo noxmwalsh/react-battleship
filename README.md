@@ -8,7 +8,7 @@ Features
 * There are unit tests to check for basic functionality
 * Uses Redux/React as the primary framework behind the application (just like it says on the tin)
 * There's a history log of the current game
-* The human player can add their own ship
+* The human player can decide ship placement (with horizonal/vertical settings)
 * There's a sembalence of an AI playing the game (although it doesn't play at the most optimum way).  
 
 ## Available Scripts
